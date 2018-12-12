@@ -1,9 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://test.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://test_box.tscn" type="PackedScene" id=3]
-[ext_resource path="res://victory_house.gd" type="Script" id=4]
+[ext_resource path="res://victory_house.tscn" type="PackedScene" id=1]
+[ext_resource path="res://test.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://camera.gd" type="Script" id=4]
+[ext_resource path="res://test_box.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -13,16 +14,15 @@ radius = 32.0
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
-
-[sub_resource type="CircleShape2D" id=3]
-
-custom_solver_bias = 0.0
-radius = 512.0
+extents = Vector2( 14, 4 )
 
 [node name="world" type="Node2D" index="0"]
 
-[node name="tree" type="RigidBody2D" parent="." index="0"]
+[node name="victory_house" parent="." index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 1232, 496 )
+
+[node name="tree" type="RigidBody2D" parent="." index="1"]
 
 position = Vector2( 480, 496 )
 input_pickable = false
@@ -43,14 +43,15 @@ linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
-script = ExtResource( 1 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Linear" ]
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="sprite" type="Sprite" parent="tree" index="0"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="collider" type="CollisionShape2D" parent="tree" index="1"]
 
@@ -67,8 +68,8 @@ limit_top = -10000000
 limit_right = 10000000
 limit_bottom = 10000000
 limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
 smoothing_enabled = false
 smoothing_speed = 5.0
 offset_v = 0.0
@@ -80,6 +81,8 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
+script = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="house_focus" type="Tween" parent="tree/camera" index="0"]
 
@@ -91,11 +94,8 @@ playback/repeat = false
 playback/speed = 1.0
 _sections_unfolded = [ "playback" ]
 
-[node name="box" parent="." index="1" instance=ExtResource( 3 )]
+[node name="bottom" type="Area2D" parent="tree" index="3"]
 
-[node name="victory_house" type="Area2D" parent="." index="2"]
-
-position = Vector2( 1344, 640 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -103,39 +103,16 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 4 )
-_sections_unfolded = [ "Collision" ]
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="icon" type="Sprite" parent="victory_house" index="0"]
+[node name="collider" type="CollisionShape2D" parent="tree/bottom" index="0"]
 
-modulate = Color( 0.0117188, 1, 0.166138, 1 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
+modulate = Color( 0.0325317, 0.320312, 0, 1 )
+position = Vector2( 0, 29 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="collider" type="CollisionShape2D" parent="victory_house" index="1"]
+[node name="box" parent="." index="2" instance=ExtResource( 5 )]
 
-scale = Vector2( 2, 2 )
-shape = SubResource( 2 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="cam_focus" type="Area2D" parent="victory_house" index="2"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-
-[node name="area" type="CollisionShape2D" parent="victory_house/cam_focus" index="0"]
-
-shape = SubResource( 3 )
-
-[connection signal="body_shape_entered" from="victory_house" to="victory_house" method="_on_victory_house_body_shape_entered"]
+[connection signal="area_entered" from="tree/bottom" to="tree" method="_on_bottom_area_entered"]
 
 
