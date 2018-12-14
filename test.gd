@@ -4,7 +4,7 @@ var max_speed = 1500
 
 var game_over = false
 var near_house = false
-onready var house_position = get_node('../victory_house').position
+var house_position = Vector2()
 
 func _ready():
 	var launch_force = 300
@@ -66,3 +66,6 @@ func on_near_house(is_near):
 func _on_bottom_area_entered(area):
 	if area.name == 'tree_landing_zone':
 		on_game_over()
+
+func _on_victory_house_created(victory_house_position):
+	house_position = victory_house_position

@@ -33,7 +33,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
-SPEED_THRESHOLD = 350
+SPEED_THRESHOLD = 650
 
 [node name="icon" type="Sprite" parent="." index="0"]
 

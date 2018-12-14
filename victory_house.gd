@@ -1,10 +1,17 @@
 extends Area2D
 
+signal created
 signal game_over
+
 export var SPEED_THRESHOLD = 500
 
 func _ready():
+	connect("created", get_node("../tree"), "_on_victory_house_created")
+	connect("created", get_node("../tree/camera"), "_on_victory_house_created")
 	connect("game_over", get_node("../tree"), "on_game_over")
+
+func emit_created():
+	emit_signal("created", position)
 
 func _process(delta):
 	pass
