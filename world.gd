@@ -7,16 +7,17 @@ var victory_house = preload("res://victory_house.tscn")
 
 export(int) var house_count = 25
 export(int) var house_padding = 3
+export(int) var house_seperation = 2
+onready var step = 176 * house_seperation
 
 var left_start = 396
 var right_start = 576
-const STEP = 176 * 2
 var houses = []
 
 func _create_house(type, index):
 	var curr_house = type.instance()
 	add_child(curr_house)
-	curr_house.position = Vector2(STEP * index, 656)
+	curr_house.position = Vector2(step * index, 656)
 	return curr_house
 
 func _ready():

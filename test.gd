@@ -76,7 +76,7 @@ func on_near_house(is_near):
 	near_house = is_near
 
 func _on_bottom_area_entered(area):
-	if area.name == 'tree_landing_zone':
+	if area.name == 'tree_stand':
 		on_game_over()
 
 func _on_victory_house_created(victory_house_position):

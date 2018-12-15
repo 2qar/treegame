@@ -1,4 +1,4 @@
-extends Area2D
+extends "res://house.gd"
 
 signal created
 signal game_over
@@ -6,16 +6,15 @@ signal game_over
 export var SPEED_THRESHOLD = 500
 
 func _ready():
+	add_snow()
+	
 	connect("created", get_node("../tree"), "_on_victory_house_created")
 	connect("created", get_node("../tree/camera"), "_on_victory_house_created")
 	connect("game_over", get_node("../tree"), "on_game_over")
-
+	
 func emit_created():
 	emit_signal("created", position)
-
-func _process(delta):
-	pass
-
+	
 func speed_too_high(tree_velocity):
 	return abs(tree_velocity.x) > SPEED_THRESHOLD or abs(tree_velocity.y) > SPEED_THRESHOLD
 

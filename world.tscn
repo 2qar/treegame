@@ -2,7 +2,7 @@
 
 [ext_resource path="res://world.gd" type="Script" id=1]
 [ext_resource path="res://test.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://tree.png" type="Texture" id=3]
 [ext_resource path="res://camera.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -13,13 +13,14 @@ radius = 32.0
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 14, 4 )
+extents = Vector2( 4, 4 )
 
 [node name="world" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 house_count = 25
 house_padding = 3
+house_seperation = 3
 
 [node name="tree" type="RigidBody2D" parent="." index="0"]
 
@@ -51,7 +52,10 @@ fly_seconds = 10
 
 [node name="sprite" type="Sprite" parent="tree" index="0"]
 
+scale = Vector2( 7, 7 )
+z_index = 1
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="collider" type="CollisionShape2D" parent="tree" index="1"]
 
@@ -109,7 +113,7 @@ audio_bus_name = "Master"
 modulate = Color( 0.0325317, 0.320312, 0, 1 )
 position = Vector2( 0, 29 )
 shape = SubResource( 2 )
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
 [node name="fuel" type="Label" parent="tree" index="4"]
 
