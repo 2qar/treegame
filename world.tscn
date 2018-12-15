@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world.gd" type="Script" id=1]
 [ext_resource path="res://test.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://camera.gd" type="Script" id=4]
-[ext_resource path="res://test_box.tscn" type="PackedScene" id=5]
-[ext_resource path="res://house.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -20,6 +18,8 @@ extents = Vector2( 14, 4 )
 [node name="world" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+house_count = 25
+house_padding = 3
 
 [node name="tree" type="RigidBody2D" parent="." index="0"]
 
@@ -47,6 +47,7 @@ _sections_unfolded = [ "Linear" ]
 __meta__ = {
 "_edit_group_": true
 }
+fly_seconds = 10
 
 [node name="sprite" type="Sprite" parent="tree" index="0"]
 
@@ -110,11 +111,26 @@ position = Vector2( 0, 29 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="box" parent="." index="1" instance=ExtResource( 5 )]
+[node name="fuel" type="Label" parent="tree" index="4"]
 
-[node name="house" parent="." index="2" instance=ExtResource( 6 )]
-
-position = Vector2( 384, 656 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -32.0
+margin_top = -48.0
+margin_right = 8.0
+margin_bottom = -34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "fuel"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="area_entered" from="tree/bottom" to="tree" method="_on_bottom_area_entered"]
 
