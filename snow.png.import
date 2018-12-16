@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tree.png-e0869f9fb9c148a5baf00bb62a85d6ad.stex"
+path="res://.import/snow.png-8fc270e39b7d8de8c01e5d1a513fe7a7.stex"
 
 [deps]
 
-source_file="res://tree.png"
-dest_files=[ "res://.import/tree.png-e0869f9fb9c148a5baf00bb62a85d6ad.stex" ]
+source_file="res://snow.png"
+dest_files=[ "res://.import/snow.png-8fc270e39b7d8de8c01e5d1a513fe7a7.stex" ]
 
 [params]
 
